@@ -91,6 +91,8 @@ To start managing the tenant through the command line, I installed PowerShell 7 
 
 To enable command-line management of my Azure tenant, I installed the Azure CLI and authenticated using az login with my tenant ID. This allowed me to securely access and manage Azure resources from the terminal instead of relying solely on the web portal. After logging in, I confirmed the connection with az account show, which returned my tenant context and verified that the CLI was properly authenticated.
 
+<img width="1027" height="599" alt="image" src="https://github.com/user-attachments/assets/3d063494-8e76-4d22-bbd0-9b515e6838ac" />
+
 <img width="1387" height="325" alt="image" src="https://github.com/user-attachments/assets/03bbf66a-7ab9-43fb-a509-06bdfcd33142" />
 
 
