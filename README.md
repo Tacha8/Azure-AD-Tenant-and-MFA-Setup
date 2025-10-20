@@ -68,7 +68,7 @@ To secure and manage the new tenant properly, I created a cloud-only Global Admi
 
 ---
 
-### Step 3) Enabled MFA for the admins
+### Enabled MFA for the admins
 
 After creating the Global Administrator account, I immediately enabled MFA to protect high-privilege access. In the Entra ID portal, I went to Users → Per-user MFA settings, selected the admin account, and enforced MFA. When I signed in with the new credentials, Azure prompted me to register the Microsoft Authenticator app and complete verification. Enabling MFA at this stage ensures that even if someone gains the admin password, they still can’t access the tenant without the second authentication factor.
 
@@ -77,48 +77,21 @@ After creating the Global Administrator account, I immediately enabled MFA to pr
 
 ---
 
-### Step 4) Mock Meeting: Initial Scan Permission (Server Team)
+###  Installed PowerShell 7 and connected with Connect-MgGraph
 
-The team collaborates with the server team to initiate scheduled credential scans. A compromise is reached to scan a single server first, monitoring resource impact, and using just-in-time Active Directory credentials for secure, controlled access.  
+To start managing the tenant through the command line, I installed PowerShell 7 and set it as my default shell. After launching it, I installed the Microsoft Graph PowerShell module using Install-Module Microsoft.Graph and then authenticated with the tenant using Connect-MgGraph. This allowed me to connect directly to Entra ID from PowerShell instead of relying only on the Azure portal, which is how IAM engineers manage users, roles, and policies at scale in real environments.
 
-**Ti:** Good morning, Mike. Ready to conduct some scans?  
+<img width="1240" height="608" alt="image" src="https://github.com/user-attachments/assets/6e8a90eb-1658-4afd-b494-d3bd246c25d8" />
 
-**Mike:** Yep. Now that our vulnerability management policy is in place, I’d like to start scheduling credentialed scans of your environment.  
-
-**Ti:** Sounds good. What’s involved, and how can we help?  
-
-**Mike:** We’re planning weekly scans of the server infrastructure. We estimate it will take 4–6 hours to scan all 2,200 assets. For this, we’ll need administrative credentials so the scan engine can remotely log in and assess systems more accurately.  
-
-**Ti:** Hold on—what exactly does scanning entail? I’m concerned about resource utilization. And you’re asking for admin credentials to all 2,200 machines—that doesn’t sound safe.  
-
-**Mike:** Those are valid concerns. The scan engine sends controlled traffic to the servers to check for vulnerabilities. It looks at things like registry settings, outdated software, and insecure protocols or cipher suites. Credentials are required so the scan can perform deeper checks, but it won’t take systems offline.  
-
-**Ti:** Okay, as long as it won’t bring down the servers, that should be fine. How about we start small—scan a single server first and monitor resource utilization?  
-
-**Mike:** That’s a good idea. Also, for credentials, could you set up a dedicated account in Active Directory? You could keep it disabled until scanning time, then enable it during the scan, and disable or deprovision it afterward. That way it’s “just-in-time” access.  
-
-**Ti:** That works. I’ll ask Susan to start automation for provisioning that account.  
-
-**Mike:** Perfect. Talk soon.  
-
-**Ti:** Sounds good. I’ll get back to you once the credentials are set up.  
-
-**Mike:** Great. See you later.  
-
-**Ti:** See you. 
+<img width="1144" height="464" alt="image" src="https://github.com/user-attachments/assets/3fb162c2-d91e-4e58-8c7e-b4081e2f831a" />
 
 ---
 
-### Step 5) Initial Scan of Server Team Assets
+### Step 5) Installed and used Azure CLI (az login)
 
-In this phase, an insecure Windows Server is provisioned to simulate the server team's environment. After creating vulnerabilities, an authenticated scan is performed, and the results are exported for future remediation steps.  
+To enable command-line management of my Azure tenant, I installed the Azure CLI and authenticated using az login with my tenant ID. This allowed me to securely access and manage Azure resources from the terminal instead of relying solely on the web portal. After logging in, I confirmed the connection with az account show, which returned my tenant context and verified that the CLI was properly authenticated.
 
-<img width="918" height="683" alt="image" src="https://github.com/user-attachments/assets/4a248da4-4ebb-48cd-bc61-8e4aa88e4da9" />
-
-
-[Scan 1 - Initial Scan](https://drive.google.com/file/d/17YyCuBLup13agA9TX2AulcKitP3udzFY/view?usp=sharing)
-
-
+<img width="1387" height="325" alt="image" src="https://github.com/user-attachments/assets/03bbf66a-7ab9-43fb-a509-06bdfcd33142" />
 
 
 ---
